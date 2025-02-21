@@ -7,25 +7,23 @@
     
     <!-- Facebook SDK -->
     <script>
-        window.fbAsyncInit = function() {
-            FB.init({
-                appId      : '3565225703774229', // ID de tu app
-                cookie     : true,
-                xfbml      : true,
-                version    : 'v18.0'
-            });
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '3565225703774229',
+      xfbml      : true,
+      version    : 'v22.0'
+    });
+    FB.AppEvents.logPageView();
+  };
 
-            FB.AppEvents.logPageView();
-        };
-
-        (function(d, s, id){
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) {return;}
-            js = d.createElement(s); js.id = id;
-            js.src = "https://connect.facebook.net/es_LA/sdk.js";
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
-    </script>
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "https://connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
     
     <style>
         body {
