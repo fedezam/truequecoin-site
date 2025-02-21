@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TruequeCoin - Iniciar sesión con Facebook</title>
+    
+    <!-- Facebook SDK -->
+    <script>
+        window.fbAsyncInit = function() {
+            FB.init({
+                appId      : '3565225703774229', // ID de tu app
+                cookie     : true,
+                xfbml      : true,
+                version    : 'v18.0'
+            });
+
+            FB.AppEvents.logPageView();
+        };
+
+        (function(d, s, id){
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {return;}
+            js = d.createElement(s); js.id = id;
+            js.src = "https://connect.facebook.net/es_LA/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        button {
+            background-color: #1877F2;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #1558a5;
+        }
+        #status {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>TruequeCoin - Facebook Login</h1>
+
+    <!-- Botón de inicio de sesión con Facebook -->
+    <button onclick="loginWithFacebook()">Iniciar sesión con Facebook</button>
+
+    <p id="status"></p>
+
+    <script>
+        function loginWithFacebook() {
+            FB.login(function(response) {
+                if (response.authResponse) {
+                    console.log('Bienvenido! Token:', response.authResponse.accessToken);
+                    document.getElementById('status').innerHTML = "¡Inicio de sesión exitoso!";
+                    
+                    // Obtener información del usuario
+                    FB.api('/me', {fields: 'name,email'}, function(response) {
+                        document.getElementById('status').innerHTML += `<br>Nombre: ${response.name}`;
+                        document.getElementById('status').innerHTML += `<br>Email: ${response.email}`;
+                    });
+
+                } else {
+                    console.log('El usuario canceló el inicio de sesión');
+                    document.getElementById('status').innerHTML = "Inicio de sesión cancelado.";
+                }
+            }, {scope: 'public_profile,email'});
+        }
+    </script>
+
+</body>
+</html>
